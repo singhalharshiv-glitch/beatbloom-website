@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beatbloom | Desi Hip-Hop Revolution</title>
+    
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <style>
+        /* --- CSS STYLES --- */
+        :root {
+            --primary: #ff0055; /* Neon Pink */
+            --secondary: #00e5ff; /* Cyan */
+            --dark: #121212;
+            --light: #f5f5f5;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        
+        body { background-color: var(--dark); color: var(--light); overflow-x: hidden; }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(0,0,0,0.9);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo { font-size: 1.8rem; font-weight: bold; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; }
+        
+        .nav-links { list-style: none; display: flex; gap: 30px; }
+        .nav-links li a { text-decoration: none; color: white; font-weight: 500; transition: 0.3s; cursor: pointer; }
+        .nav-links li a:hover { color: var(--secondary); }
+
+        /* Creative 'About Us' Button */
+        .about-link { 
+            border: 2px solid var(--secondary); 
+            padding: 5px 20px; 
+            border-radius: 20px; 
+            font-weight: bold !important;
+        }
+        .about-link:hover { 
+            background: var(--secondary); 
+            color: var(--dark) !important; 
+            box-shadow: 0 0 15px var(--secondary);
+        }
+
+        /* Page Layout */
+        .page-section {
+            min-height: 100vh;
+            padding: 100px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+
+        /* PAGE 1: Intro & Login (Updated with Hinglish vibe) */
+        #home {
+            background: linear-gradient(135deg, #0f0f0f, #222);
+            text-align: center;
+        }
+        
+        /* Typewriter Effect Cursor */
+        .typewriter-text {
+            border-right: 3px solid var(--primary);
+            padding-right: 5px;
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink { 50% { border-color: transparent; } }
+
+        .hero-title { font-size: 4rem; margin-bottom: 20px; }
+        .hero-span { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
+        
+        .login-box {
+            background: var(--glass);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            width: 320px;
+            margin-top: 30px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        input {
+            width: 100%; padding: 12px; margin: 10px 0;
+            background: rgba(0,0,0,0.7); border: 1px solid #444; color: white;
+            border-radius: 5px;
+        }
+        
+        button {
+            width: 100%; padding: 12px; background: var(--primary); border: none;
+            color: white; font-weight: bold; cursor: pointer; transition: 0.3s; 
+            margin-bottom: 15px; border-radius: 5px; text-transform: uppercase;
+        }
+        button:hover { background: var(--secondary); color: var(--dark); letter-spacing: 1px; }
+
+        /* Google Button Centering */
+        .g_id_signin {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        /* PAGE 2: Courses */
+        #courses { text-align: center; background: #161616; }
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 15px;
+            transition: 0.3s;
+            border-top: 4px solid var(--secondary);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2); }
+        
+        .card img { 
+            width: 100%; 
+            height: 250px; 
+            object-fit: cover; 
+            background: #333; 
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .mentor { color: #aaa; font-size: 0.9rem; margin-bottom: 10px; font-style: italic; }
+        
+        .book-btn {
+            background: #25D366; color: white; padding: 12px 20px;
+            text-decoration: none; display: block; margin-top: 15px;
+            border-radius: 5px; font-weight: bold; text-align: center; width: 100%;
+            transition: 0.3s;
+        }
+        .book-btn:hover { background: #128C7E; transform: scale(1.02); }
+
+        /* PAGE 3: About Us (With Background Image) */
+        #about {
+            text-align: center;
+            /* Replace with your image name if different */
+            background-image: url('background.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect */
+            position: relative;
+        }
+
+        #about::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.75); z-index: 1;
+        }
+
+        #about h2, #about p { position: relative; z-index: 2; }
+
+        #about p {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 40px;
+            border-radius: 15px;
+            border-left: 5px solid var(--primary);
+            margin-top: 30px;
+            font-size: 1.1rem;
+            backdrop-filter: blur(5px);
+        }
+
+        /* PAGE 4 & 5 */
+        #community, #contact { text-align: center; }
+        h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--secondary); text-transform: uppercase; }
+
+        /* Contact Box Styling */
+        .contact-info {
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: left;
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid #333;
+        }
+        .contact-person { margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 15px; }
+        .contact-person:last-child { border-bottom: none; padding-bottom: 0; }
+        .contact-label { color: var(--primary); font-weight: bold; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Beatbloom</div>
+        <ul class="nav-links">
+            <li><a onclick="scrollToSection('home')">Adda (Home)</a></li>
+            <li><a onclick="scrollToSection('courses')">Classes</a></li>
+            <li><a onclick="scrollToSection('community')">Community</a></li>
+            <li><a onclick="scrollToSection('contact')">Sampark</a></li>
+            <li><a onclick="scrollToSection('about')" class="about-link">Humare Baare Mein</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="page-section">
+        <h1 class="hero-title">Apni <span class="hero-span typewriter-text" id="typing-text"></span></h1>
+        <p>Beatboxing, Rapping, aur Instruments seekho – seedha experts se.</p>
+        
+        <div class="login-box">
+            <h3>Squad Login</h3>
+            
+            <input type="text" placeholder="Tera Naam (Username)">
+            <input type="password" placeholder="Secret Code (Password)">
+            <button onclick="alert('Welcome to the Squad!')">Studio Mein Aao</button>
+            
+            <p style="font-size: 0.8rem; color: #888; margin: 10px 0;">YA FIR</p>
+
+            <div id="g_id_onload"
+                 data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                 data-callback="handleCredentialResponse"
+                 data-auto_prompt="false">
+            </div>
+
+            <div class="g_id_signin"
+                 data-type="standard"
+                 data-size="large"
+                 data-theme="outline"
+                 data-text="sign_in_with"
+                 data-shape="rectangular"
+                 data-logo_alignment="left">
+            </div>
+        </div>
+    </section>
+
+    <section id="courses" class="page-section">
+        <h2>Seekho aur Fodo</h2>
+        <div class="course-grid">
+            
+            <div class="card">
+                <img src="Prabhasbahubali.jpg" alt="Prabhas Semwal">
+                <h3>Beatbox Fundamentals</h3>
+                <p class="mentor">
+                    Guru: 
+                    <a href="https://www.instagram.com/infinitybeats18" target="_blank" style="color: var(--secondary);">
+                        Prabhas Semwal ↗
+                    </a>
+                </p>
+                <p>Boots aur Cats ka magic seekho from scratch.</p>
+                <a href="https://wa.me/919305068517?text=Bhai%20Beatbox%20seekhna%20hai" class="book-btn" target="_blank">Book Now (WhatsApp)</a>
+            </div>
+
+            <div class="card">
+                <img src="ParthV.jpg" alt="Parth Verma">
+                <h3>Rapping & Hip-Hop</h3>
+                <p class="mentor">
+                    Guru: 
+                    <a href="https://www.instagram.com/parth5v" target="_blank" style="color: var(--secondary);">
+                        Parth Verma ↗
+                    </a>
+                </p>
+                <p>Bars drop karna aur flow pakadna seekho.</p>
+                <a href="https://wa.me/919305068517?text=Bhai%20Rap%20seekhna%20hai" class="book-btn" target="_blank">Book Now (WhatsApp)</a>
+            </div>
+
+            <div class="card">
+                <img src="https://via.placeholder.com/300x200?text=Guitar" alt="Guitar">
+                <h3>Guitar Basics</h3>
+                <p class="mentor">Guru: Sarah Keys</p>
+                <p>Strings pe haath saaf karo.</p>
+                <a href="https://wa.me/919305068517?text=Bhai%20Guitar%20seekhna%20hai" class="book-btn" target="_blank">Book Now (WhatsApp)</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="page-section">
+        <h2>About Beatbloom</h2>
+        <p style="max-width: 600px; line-height: 1.6;">
+            <strong>Beatbloom</strong> sirf ek website nahi, ek movement hai. Hum underground music culture ko mainstream education system mein laa rahe hain. <br><br>
+            Chahe tumhe <em>Bars</em> drop karne ho ya <em>Beats</em>, humare paas wo community hai jo tumhe grow karne mein help karegi. No boring lectures, only pure skill.
+        </p>
+    </section>
+
+    <section id="community" class="page-section">
+        <h2>Student Spotlight</h2>
+        <p>Agla Cypher aur Battles yahan dikhenge.</p>
+        <div style="margin-top:20px; border:2px dashed #333; padding:40px; width:100%; max-width:600px; background:#111; color: #555;">
+            [Video Gallery Coming Soon...]
+        </div>
+    </section>
+
+    <section id="contact" class="page-section" style="background: #0f0f0f;">
+        <h2>Humse Baat Karo</h2>
+        
+        <div class="contact-info">
+            <div class="contact-person">
+                <div class="contact-label"><span>👑</span> Harshiv Singhal</div>
+                <div>📞 <a href="tel:+919305068517" style="color:white; text-decoration:none;">+91 9305068517</a></div>
+                <div>✉️ singhalharshiv@gmail.com</div>
+            </div>
+            <div class="contact-person">
+                <div class="contact-label"><span>🔥</span> Pranjal Negi</div>
+                <div>📞 <a href="tel:+918630712099" style="color:white; text-decoration:none;">+91 8630712099</a></div>
+                <div>✉️ pn256780@gmail.com</div>
+            </div>
+        </div>
+
+        <form style="margin-top: 10px; width: 100%; max-width: 350px;">
+            <input type="text" placeholder="Tumhara Naam">
+            <input type="email" placeholder="Email ID">
+            <textarea style="width:100%; background:rgba(0,0,0,0.5); color:white; border:1px solid #444; border-radius:5px; padding:10px;" rows="4" placeholder="Kya bolna chahte ho?"></textarea>
+            <button style="margin-top:10px;">Bhejo Message</button>
+        </form>
+    </section>
+
+    <script>
+        // --- FUNCTIONAL JS ---
+
+        // 1. Smooth Scroll
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 2. Creative Typewriter Effect for Title
+        const words = ["Rhythm Pehchano", "Awaaz Uthao", "Flow Banao"];
+        let i = 0;
+        let timer;
+
+        function typeWriter() {
+            const heading = document.getElementById("typing-text");
+            const word = words[i % words.length];
+            let letterIndex = 0;
+
+            function type() {
+                if (letterIndex < word.length) {
+                    heading.innerHTML += word.charAt(letterIndex);
+                    letterIndex++;
+                    setTimeout(type, 150); // Speed of typing
+                } else {
+                    setTimeout(erase, 2000); // Wait before deleting
+                }
+            }
+
+            function erase() {
+                if (letterIndex > 0) {
+                    heading.innerHTML = word.substring(0, letterIndex - 1);
+                    letterIndex--;
+                    setTimeout(erase, 100);
+                } else {
+                    i++;
+                    type();
+                }
+            }
+            type();
+        }
+
+        // Start effect on load
+        window.onload = function() {
+            typeWriter();
+        };
+
+        // 3. Google Login Handler
+        function handleCredentialResponse(response) {
+            console.log("Encoded JWT ID token: " + response.credential);
+            const responsePayload = decodeJwtResponse(response.credential);
+            alert("Swagat hai Beatbloom pe, " + responsePayload.name + "!");
+        }
+
+        function decodeJwtResponse(token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(jsonPayload);
+        }
+    </script>
+
+</body>
+</html>
